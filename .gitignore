@@ -1,3 +1,5 @@
 .idea
 sfeir_java8_lambda.iml
 code/intro.iml
+slides/slides.iml
+slides/node_modules
