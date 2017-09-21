@@ -12,5 +12,11 @@
     "asciidoctor-reveal.js": "^1.5.5-2",
     "asciidoctor-template.js": "^1.5.5-2",
     "asciidoctor.js": "^1.5.5-2"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-execute": "^0.2.2",
+    "grunt-watch-change": "^0.1.1"
   }
 }
