@@ -131,3 +131,73 @@ private  methods
 ----
 include::../code/src/main/java/lu/sfeir/java8/lambda/method_reference/AnInterface.java[tags=anInterface]
 ----
+
+== API - Filter
+
+Write code to provide a filtering API
+
+== API - Filter
+
+Player
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/api/FilterApi.java[tags=player]
+----
+
+== API - Filter
+
+Define an interface with a single method
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/api/FilterApi.java[tags=a-api]
+----
+
+== API - Filter
+
+Can be use to define some filter using lambda
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/api/FilterApi.java[tags=a-code]
+----
+
+== API - Filter
+
+add a default method to chain filters
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/api/FilterApi.java[tags=b-api]
+----
+
+== API - Filter
+
+filters can now be chained
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/api/FilterApi.java[tags=b-code]
+----
+
+== API - Filter
+
+use generics
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/api/FilterApi.java[tags=c-api]
+----
+
+
+== API - Filter
+
+use static members and static methods to define specific filters
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/api/FilterApi.java[tags=c-specific-api]
+----
+
+== API - Filter
+
+specific filters can then be used
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/api/FilterApi.java[tags=c-code]
+----
+

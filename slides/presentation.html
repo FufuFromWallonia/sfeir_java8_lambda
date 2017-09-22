@@ -229,9 +229,9 @@
 </div>
 <div id="" class="listingblock $$id apply call">
   <div class="content">
-    <pre lang="" class="highlight true"><code>        Function&lt;Player, String&gt; f1 = (player) -&gt; player.getName();
-
-        Function&lt;Player, String&gt; f2 = Player::getName;</code></pre>
+    <pre lang="" class="highlight true"><code>//        Function&lt;Player, String&gt; f1 = (player) -&gt; player.getName();
+//
+//        Function&lt;Player, String&gt; f2 = Player::getName;</code></pre>
   </div>
 </div>
   </section>
@@ -245,11 +245,11 @@
 </div>
 <div id="" class="listingblock $$id apply call">
   <div class="content">
-    <pre lang="" class="highlight true"><code>        BinaryOperator&lt;Integer&gt; f3 = (int1, int2) -&gt; int1 + int2;
-
-        BinaryOperator&lt;Integer&gt; f4 = (int1, int2) -&gt; Integer.sum(int1, int2);
-
-        BinaryOperator&lt;Integer&gt; f5 = Integer::sum;</code></pre>
+    <pre lang="" class="highlight true"><code>//        BinaryOperator&lt;Integer&gt; f3 = (int1, int2) -&gt; int1 + int2;
+//
+//        BinaryOperator&lt;Integer&gt; f4 = (int1, int2) -&gt; Integer.sum(int1, int2);
+//
+//        BinaryOperator&lt;Integer&gt; f5 = Integer::sum;</code></pre>
   </div>
 </div>
   </section>
@@ -263,9 +263,9 @@
 </div>
 <div id="" class="listingblock $$id apply call">
   <div class="content">
-    <pre lang="" class="highlight true"><code>        Consumer&lt;String&gt; f6 = s -&gt; System.out.println(s);
-
-        Consumer&lt;String&gt; f7 = System.out::println;</code></pre>
+    <pre lang="" class="highlight true"><code>//        Consumer&lt;String&gt; f6 = s -&gt; System.out.println(s);
+//
+//        Consumer&lt;String&gt; f7 = System.out::println;</code></pre>
   </div>
 </div>
   </section>
@@ -386,10 +386,205 @@
         //...
     }
 
-    private void aPrivateMethod() {
-        //...
-    }
+//    private void aPrivateMethod() {
+//        //...
+//    }
 }</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_filter" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API - Filter</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>Write code to provide a filtering API</p>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_filter_2" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API - Filter</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>Player</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>    @AllArgsConstructor
+    @Getter
+    @Setter
+    public static class Player {
+
+        private String name;
+        private int xp;
+        private boolean gameFinished;
+
+        public Player(String name) {
+            this.name = name;
+        }
+    }</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_filter_3" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API - Filter</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>Define an interface with a single method</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        public interface Filter {
+
+            boolean test(Player player);
+        }</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_filter_4" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API - Filter</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>Can be use to define some filter using lambda</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>            Filter moreThan20XP = (player) -&gt; player.getXp() &gt; 20;
+
+            System.out.println(moreThan20XP.
+                    test(new Player("Jimmy", 10, false))); // false
+
+            System.out.println(moreThan20XP.
+                    test(new Player("Toto", 30, false))); // true</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_filter_5" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API - Filter</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>add a default method to chain filters</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        public interface Filter {
+
+            boolean test(Player player);
+
+            default Filter and(Filter filter) {
+
+                return player -&gt; this.test(player) &amp;&amp; filter.test(player);
+            }
+        }</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_filter_6" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API - Filter</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>filters can now be chained</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>            Filter gameFinished = (player) -&gt; player.isGameFinished();
+            Filter moreThan20XP = (player) -&gt; player.getXp() &gt; 20;
+
+            Filter rockStar = gameFinished.and(moreThan20XP);
+
+            System.out.println(rockStar.
+                    test(new Player("Noob", 10, false))); // false
+
+            System.out.println(rockStar.
+                    test(new Player("Florian", 15, true))); // false
+
+            System.out.println(rockStar.
+                    test(new Player("Jimmy", 25, true))); // true</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_filter_7" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API - Filter</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>use generics</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        public interface Filter&lt;T&gt; {
+
+            boolean test(T subject);
+
+            default Filter&lt;T&gt; and(Filter&lt;T&gt; filter) {
+
+                return subject -&gt; this.test(subject) &amp;&amp; filter.test(subject);
+            }
+        }</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_filter_8" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API - Filter</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>use static members and static methods to define specific filters</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        public interface PlayerFilter {
+
+            Filter&lt;Player&gt; GAME_FINISHED = (player) -&gt; player.isGameFinished();
+
+            Filter&lt;Player&gt; MORE_THAN_20_XP = (player) -&gt; player.getXp() &gt; 20;
+
+            Filter&lt;Player&gt; ROCK_STAR = GAME_FINISHED.and(MORE_THAN_20_XP);
+
+            static Filter&lt;Player&gt; hasMoreXPThan(int xp) {
+
+                return (player -&gt; player.getXp() &gt; xp);
+            }
+        }</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_filter_9" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API - Filter</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>specific filters can then be used</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>            System.out.println(PlayerFilter.ROCK_STAR.
+                    test(new Player("Noob", 10, false))); // false
+
+            System.out.println(PlayerFilter.ROCK_STAR.
+                    test(new Player("Warrior", 15, true))); // false
+
+            System.out.println(PlayerFilter.ROCK_STAR.
+                    test(new Player("Jimmy", 25, true))); // true
+
+            System.out.println(PlayerFilter.hasMoreXPThan(50).
+                    test(new Player("Julien", 25, true))); // false
+
+            System.out.println(PlayerFilter.hasMoreXPThan(50).
+                    test(new Player("Karl", 51, true))); // true</code></pre>
   </div>
 </div>
   </section>

@@ -13,8 +13,8 @@ public interface AnInterface {
         //...
     }
 
-    private void aPrivateMethod() {
-        //...
-    }
+//    private void aPrivateMethod() {
+//        //...
+//    }
 }
 //end::anInterface[]

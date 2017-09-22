@@ -1,40 +1,45 @@
 package lu.sfeir.java8.lambda.method_reference;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.Objects;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Player {
 
     private String name;
 
-    public static void withMethodReference() {
-
-        // tag::methodReference[]
-        Function<Player, String> f1 = (player) -> player.getName();
-
-        Function<Player, String> f2 = Player::getName;
-        // end::methodReference[]
-
-        // tag::methodReferenceStatic[]
-        BinaryOperator<Integer> f3 = (int1, int2) -> int1 + int2;
-
-        BinaryOperator<Integer> f4 = (int1, int2) -> Integer.sum(int1, int2);
-
-        BinaryOperator<Integer> f5 = Integer::sum;
-        // end::methodReferenceStatic[]
-
-
-        // tag::methodReferenceStaticProperty[]
-        Consumer<String> f6 = s -> System.out.println(s);
-
-        Consumer<String> f7 = System.out::println;
-        // end::methodReferenceStaticProperty[]
-    }
+//    public static void withMethodReference() {
+//
+//        // tag::methodReference[]
+//        Function<Player, String> f1 = (player) -> player.getName();
+//
+//        Function<Player, String> f2 = Player::getName;
+//        // end::methodReference[]
+//
+//        // tag::methodReferenceStatic[]
+//        BinaryOperator<Integer> f3 = (int1, int2) -> int1 + int2;
+//
+//        BinaryOperator<Integer> f4 = (int1, int2) -> Integer.sum(int1, int2);
+//
+//        BinaryOperator<Integer> f5 = Integer::sum;
+//        // end::methodReferenceStatic[]
+//
+//
+//        // tag::methodReferenceStaticProperty[]
+//        Consumer<String> f6 = s -> System.out.println(s);
+//
+//        Consumer<String> f7 = System.out::println;
+//        // end::methodReferenceStaticProperty[]
+//    }
 
 }
