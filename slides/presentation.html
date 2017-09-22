@@ -17,23 +17,380 @@
     <div class="reveal">
       <div class="slides">
 <section>
-  <section id="_slide_one" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
-    <h2>Slide One</h2>
+  <section id="_agenda" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>Agenda</h2>
 <div class="ulist $$id apply call $$id apply call">
   <ul class="$$id apply call">
     <li>
-      <p>Foo
+      <p>Lambda expression
       </p>
     </li>
     <li>
-      <p>Bar
+      <p>Method reference
       </p>
     </li>
     <li>
-      <p>World
+      <p>Functional interfaces
       </p>
     </li>
   </ul>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_lambda_expression" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>Lambda expression</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>How to write, build and  use lambdas</p>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_what_is_lambda_expression" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>What is lambda expression?</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>Let&#8217;s introduce this with some examples</p>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_example_1" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>Example 1</h2>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        Comparator&lt;String&gt; comparator = new Comparator&lt;String&gt;() {
+            public int compare(String s1, String s2) {
+                return Integer.compare(s1.length(), s2.length());
+            }
+        };
+
+        String[] strings = {"Alain", "Benjamin"};
+        Arrays.sort(strings, comparator);</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_example_2" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>Example 2</h2>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        Runnable r = new Runnable() {
+            public void run() {
+                int i = 0;
+                while (i++ &lt; 10) {
+                    System.out.println("It works!");
+                }
+            }
+        };
+
+        Executors.newSingleThreadExecutor().execute(r);</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_what_did_we_do" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>What did we do?</h2>
+<div class="ulist $$id apply call $$id apply call">
+  <ul class="$$id apply call">
+    <li>
+      <p>We wrote some code in an anonymous class
+      </p>
+    </li>
+    <li>
+      <p>And we passed it to another piece of code
+      </p>
+    </li>
+    <li>
+      <p>That executed it "later"
+      </p>
+    </li>
+    <li>
+      <p>And in another context (thread)
+      </p>
+    </li>
+    <li>
+      <p>We passed code as a parameter
+      </p>
+    </li>
+    <li>
+      <p>And we used anonymous class, because it is the only way to do it in Java
+      </p>
+    </li>
+  </ul>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_example_1_with_lambda" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>Example 1 with lambda</h2>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        Comparator&lt;String&gt; comparator = new Comparator&lt;String&gt;() {
+            public int compare(String s1, String s2) {
+                return Integer.compare(s1.length(), s2.length());
+            }
+        };
+
+        String[] strings = {"Alain", "Benjamin"};
+        Arrays.sort(strings, comparator);</code></pre>
+  </div>
+</div>
+<div id="" class="paragraph $$id apply call">
+  <p>Becomes</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        Comparator&lt;String&gt; comparator =
+                (String s1, String s2)
+                        -&gt; Integer.compare(s1.length(), s2.length());</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_example_2_with_lambda" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>Example 2 with lambda</h2>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        Runnable r = new Runnable() {
+            public void run() {
+                int i = 0;
+                while (i++ &lt; 10) {
+                    System.out.println("It works!");
+                }
+            }
+        };
+
+        Executors.newSingleThreadExecutor().execute(r);</code></pre>
+  </div>
+</div>
+<div id="" class="paragraph $$id apply call">
+  <p>Becomes</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        Runnable r = () -&gt; {
+            int i = 0;
+            while (i++ &lt; 10) {
+                System.out.println("It works!");
+            }
+        };</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_remarks" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>Remarks</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>Parameters type can be omitted</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        Comparator&lt;String&gt; comparator =
+                (String s1, String s2)
+                        -&gt; Integer.compare(s1.length(), s2.length());</code></pre>
+  </div>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        Comparator&lt;String&gt; comparator =
+                (s1, s2)
+                        -&gt; Integer.compare(s1.length(), s2.length());</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_method_references" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>Method references</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>Another way of writing lambda expressions</p>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_method_references_2" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>Method references</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>A first example</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        Function&lt;Player, String&gt; f1 = (player) -&gt; player.getName();
+
+        Function&lt;Player, String&gt; f2 = Player::getName;</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_method_references_3" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>Method references</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>A second example</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        BinaryOperator&lt;Integer&gt; f3 = (int1, int2) -&gt; int1 + int2;
+
+        BinaryOperator&lt;Integer&gt; f4 = (int1, int2) -&gt; Integer.sum(int1, int2);
+
+        BinaryOperator&lt;Integer&gt; f5 = Integer::sum;</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_method_references_4" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>Method references</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>A last example</p>
+</div>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>        Consumer&lt;String&gt; f6 = s -&gt; System.out.println(s);
+
+        Consumer&lt;String&gt; f7 = System.out::println;</code></pre>
+  </div>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_quick_summary" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>Quick summary</h2>
+<div class="ulist $$id apply call $$id apply call">
+  <ul class="$$id apply call">
+    <li>
+      <p>a lambda is a way to avoid using anonymous classes
+      </p>
+    </li>
+    <li>
+      <p>a lambda is a function
+      </p>
+    </li>
+    <li>
+      <p>a method reference a another way to create a lambda
+      </p>
+    </li>
+  </ul>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_toolbox_interfaces" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API toolbox - interfaces</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>Java 8 and 9 introduced a few tools to work with interfaces</p>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_toolbox_interfaces_2" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API toolbox - interfaces</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>default methods</p>
+</div>
+<div class="ulist $$id apply call $$id apply call">
+  <ul class="$$id apply call">
+    <li>
+      <p>methods with an implementation
+      </p>
+    </li>
+    <li>
+      <p>can&#8217;t override Object&#8217;s methods
+      </p>
+    </li>
+    <li>
+      <p>can be overridden by sub classes
+      </p>
+    </li>
+  </ul>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_toolbox_interfaces_3" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API toolbox - interfaces</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>static methods</p>
+</div>
+<div class="ulist $$id apply call $$id apply call">
+  <ul class="$$id apply call">
+    <li>
+      <p>methods with an implementation
+      </p>
+    </li>
+    <li>
+      <p>can&#8217;t be overridden by sub classes
+      </p>
+    </li>
+  </ul>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_toolbox_interfaces_4" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API toolbox - interfaces</h2>
+<div id="" class="paragraph $$id apply call">
+  <p>private  methods</p>
+</div>
+<div class="ulist $$id apply call $$id apply call">
+  <ul class="$$id apply call">
+    <li>
+      <p>methods with an implementation
+      </p>
+    </li>
+    <li>
+      <p>can&#8217;t be overridden by sub classes
+      </p>
+    </li>
+  </ul>
+</div>
+  </section>
+</section>
+
+<section>
+  <section id="_api_toolbox_interfaces_5" data-transition="" data-transition-speed="" data-background="" data-background-size="" data-background-repeat="" data-background-transition="">
+    <h2>API toolbox - interfaces</h2>
+<div id="" class="listingblock $$id apply call">
+  <div class="content">
+    <pre lang="" class="highlight true"><code>public interface AnInterface {
+
+    String A_STATIC_FIELD = "Hello";
+
+    default void aDefaultMethod() {
+        //...
+    }
+
+    static void aStaticMethod() {
+        //...
+    }
+
+    private void aPrivateMethod() {
+        //...
+    }
+}</code></pre>
+  </div>
 </div>
   </section>
 </section></div>

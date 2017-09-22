@@ -12,6 +12,7 @@ public class Sample2 {
     public void comparatorUsingAnonymousClasses()
 
     {
+        // tag::withAnonymous[]
         Runnable r = new Runnable() {
             public void run() {
                 int i = 0;
@@ -22,17 +23,19 @@ public class Sample2 {
         };
 
         Executors.newSingleThreadExecutor().execute(r);
+        // end::withAnonymous[]
     }
 
     public void comparatorUsingLambda() {
 
+        // tag::withLambda[]
         Runnable r = () -> {
             int i = 0;
             while (i++ < 10) {
                 System.out.println("It works!");
             }
         };
-
+        // end::withLambda[]
         Executors.newSingleThreadExecutor().execute(r);
     }
 }

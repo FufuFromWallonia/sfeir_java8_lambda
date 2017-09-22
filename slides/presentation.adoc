@@ -3,8 +3,131 @@
 // 'revealjsdir' value by removing the comments from the line below:
 //:revealjsdir: node_modules/asciidoctor-reveal.js/node_modules/reveal.js
 
-== Slide One
+== Agenda
 
-* Foo
-* Bar
-* World
+* Lambda expression
+* Method reference
+* Functional interfaces
+
+
+== Lambda expression
+
+How to write, build and  use lambdas
+
+
+== What is lambda expression?
+Let's introduce this with some examples
+
+== Example 1
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/anonymous/Sample1.java[tags=withAnonymous]
+----
+
+== Example 2
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/anonymous/Sample2.java[tags=withAnonymous]
+----
+
+== What did we do?
+* We wrote some code in an anonymous class
+* And we passed it to another piece of code
+* That executed it "later"
+* And in another context (thread)
+* We passed code as a parameter
+* And we used anonymous class, because it is the only way to do it in Java
+
+== Example 1 with lambda
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/anonymous/Sample1.java[tags=withAnonymous]
+----
+Becomes
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/anonymous/Sample1.java[tags=withLambda]
+----
+== Example 2 with lambda
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/anonymous/Sample2.java[tags=withAnonymous]
+----
+Becomes
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/anonymous/Sample2.java[tags=withLambda]
+----
+
+== Remarks
+
+Parameters type can be omitted
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/anonymous/Sample1.java[tags=withLambda]
+----
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/anonymous/Sample1.java[tags=withLambdaWithType]
+----
+
+== Method references
+
+Another way of writing lambda expressions
+
+== Method references
+
+A first example
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/method_reference/Player.java[tags=methodReference]
+----
+
+== Method references
+
+A second example
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/method_reference/Player.java[tags=methodReferenceStatic]
+----
+
+== Method references
+
+A last example
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/method_reference/Player.java[tags=methodReferenceStaticProperty]
+----
+
+== Quick summary
+
+* a lambda is a way to avoid using anonymous classes
+* a lambda is a function
+* a method reference a another way to create a lambda
+
+== API toolbox - interfaces
+
+Java 8 and 9 introduced a few tools to work with interfaces
+
+== API toolbox - interfaces
+
+default methods
+
+* methods with an implementation
+* can't override Object's methods
+* can be overridden by sub classes
+
+== API toolbox - interfaces
+
+static methods
+
+* methods with an implementation
+* can't be overridden by sub classes
+
+
+== API toolbox - interfaces
+
+private  methods
+
+* methods with an implementation
+* can't be overridden by sub classes
+
+== API toolbox - interfaces
+
+----
+include::../code/src/main/java/lu/sfeir/java8/lambda/method_reference/AnInterface.java[tags=anInterface]
+----
