@@ -24,12 +24,8 @@ public class Kata2Test {
     @Test
     public void year_of_the_last_publication_of_jk_rowling() throws IOException {
 
-        OptionalInt max = getBooks().stream()
-                .filter(book -> book.getAuthor().getName().equalsIgnoreCase("J. K. Rowling"))
-                .mapToInt(book -> Integer.valueOf(book.getPublishYear()))
-                .max();
-
-        MatcherAssert.assertThat(max.getAsInt(), CoreMatchers.equalTo(2007));
+        int max = 0;
+        MatcherAssert.assertThat(max, CoreMatchers.equalTo(2007));
     }
 
     /**
@@ -40,15 +36,10 @@ public class Kata2Test {
     @Test
     public void author_who_published_the_most_book() throws IOException {
 
-        Map.Entry<Author, Long> authorWhoPublishedTheMostBooks = getBooks().stream()
-                .collect(Collectors.groupingBy(o -> o.getAuthor(), Collectors.counting()))
-                .entrySet()
-                .stream()
-                .max(Comparator.comparingLong(Map.Entry::getValue))
-                .get();
-
-        System.out.println("The author " + authorWhoPublishedTheMostBooks.getKey().getName()
-                + " published " + authorWhoPublishedTheMostBooks.getValue() + " books");
+        String name = null;
+        Long nbOfBooks = null;
+        System.out.println("The author " + name
+                + " published " + nbOfBooks + " books");
     }
 
     private List<Book> getBooks() throws IOException {
