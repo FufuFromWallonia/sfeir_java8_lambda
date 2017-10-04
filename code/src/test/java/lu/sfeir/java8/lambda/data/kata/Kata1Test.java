@@ -2,6 +2,8 @@ package lu.sfeir.java8.lambda.data.kata;
 
 import org.junit.Test;
 
+import java.util.Objects;
+
 import static lu.sfeir.java8.lambda.data.kata.Verify.*;
 
 public class Kata1Test {
@@ -12,7 +14,7 @@ public class Kata1Test {
     @Test
     public void should_match_victor_hugo() {
 
-        verifyVictorHugo(null);
+        verifyVictorHugo(author -> "Victor Hugo".equalsIgnoreCase(author.getName()));
     }
 
     /**
@@ -21,7 +23,7 @@ public class Kata1Test {
     @Test
     public void should_match_authors_having_reference() {
 
-        verifyAuthorsHavingReference(null);
+        verifyAuthorsHavingReference(author -> Objects.nonNull(author.getReference()));
     }
 
     /**
@@ -30,7 +32,7 @@ public class Kata1Test {
     @Test
     public void should_return_the_first_author_of_the_authors_given_in_parameter() {
 
-        verifyFirstAuthorIsReturnedFromTheGivenList(null);
+        verifyFirstAuthorIsReturnedFromTheGivenList(authors -> authors.get(0));
     }
 
     /**
@@ -41,6 +43,6 @@ public class Kata1Test {
     @Test
     public void should_pass_a_function_that_return_a_lambda_which_filter_the_authors_on_a_given_name() {
 
-        verifyFunctionReturningAFunction(null);
+        verifyFunctionReturningAFunction(name -> author -> name.equalsIgnoreCase(author.getName()));
     }
 }
